@@ -23,11 +23,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
-	origin: "*",
-	credentials: true
+    origin: "*",
+    credentials: true
 }))
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
+app.get('/test', (req, res) => res.json({ msg: "success" }))
 app.use('/api', aplicatie)
 
 app.listen(cfg.port, () => {
