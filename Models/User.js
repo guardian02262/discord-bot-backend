@@ -19,7 +19,9 @@ let schema = Schema({
         type: Array,
         required: true
     },
-    roles: [Role]
+    role: {
+        type: Array
+    }
 })
 
 module.exports = model('User', schema)
