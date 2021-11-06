@@ -1,9 +1,13 @@
 const app = require("express").Router();
 const passport = require("passport");
 const User = require("../../Models/User");
+const Role = require("../../Models/Role");
 const Guild = require("../../Models/GuildSchema");
 const config = require("../../config");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const message = require("../../constants/msg");
+const guild = require("../../bot/src/models/guild");
+
 async function bGetGuilds() {
     const res = await fetch("http://discord.com/api/v9/users/@me/guilds", {
       method: "GET",
@@ -98,4 +102,47 @@ app.post("/prefixs", async (req, res) => {
     res.json({msg: err})
   }
 });
+
+//api for admin to creat role
+app.post("/createrole", async (req, res) => {
+  try {
+    let { role } = req.body;
+    role = await guild.createRole(role);
+    if (!role) {
+      res.json({ result: false, msg: message.FAILD_CREATE_ROLE });
+    }
+    const userRole = await Role.create(role);
+    if (!userRole) {
+      res.json({ result: false, msg: message.FAILD_CREATE_ROLE });
+    }
+
+    userRole.save();
+  }
+  catch(error) {
+    console.log("error", error);
+    res.json({ result: false, msg: err });
+  }
+})
+
+//api for client to buy role
+app.post("/buyrole", async(req, res) => {
+  let { userId, role } = req.body;
+  try {
+    const user = await User.findOne({ discordId: userId });
+    const member = guild.members.get(userId);
+    let userRole = Array.from(guild.roles.values())
+      .find(r => r.name === role);
+
+    if (userRole) {
+      res.json({ result: false, msg: message.ROLE_NOT_FOUND });
+    }
+    await member.addRole(userRole.id, 'Buyed new role');
+    user.update({ ...user, role: userRole });
+    res.json({ result: true, msg: message.ROLE_BUYED });
+  } 
+  catch (err) {
+    console.log(err);
+    res.json({ result: false, msg: err});
+  }
+})
 module.exports = app;

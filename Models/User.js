@@ -17,6 +17,10 @@ let schema = Schema({
     guilds: {
         type: Array,
         required: true
+    },
+    role: {
+        type: ObjectId,
+        ref: 'Role.id'
     }
 })
 
