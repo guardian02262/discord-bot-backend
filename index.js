@@ -31,6 +31,6 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/test', (req, res) => res.json({ msg: "success" }))
 app.use('/api', aplicatie)
 
-app.listen(cfg.port, () => {
+app.listen(process.env.port || cfg.port, () => {
     console.log('Work!')
 })
