@@ -9,6 +9,7 @@ var session = require('express-session')
 mongoose.connect(cfg.database)
 let aplicatie = require('./Routers/api')
 const MongoDbStore = require('connect-mongo');
+
 app.use(session({
     secret: 'secret',
     cookie: {
