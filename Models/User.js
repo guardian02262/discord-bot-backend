@@ -14,7 +14,7 @@ let schema = Schema({
     },
     avatar: {
         type: String,
-        required: true,
+        default: ''
     },
     guilds: {
         type: Array,
