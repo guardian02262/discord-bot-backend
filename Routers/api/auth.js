@@ -3,9 +3,9 @@ const passport = require('passport')
 const cfg = require('../../config')
 
 app.get('/discord', passport.authenticate('discord'));
-app.get('/discord/redirect', (req, res, next) => {
+app.get('/discord/redirect', async (req, res, next) => {
     try {
-        passport.authenticate('discord', {
+        await passport.authenticate('discord', {
             failureRedirect: `${cfg.FRONDEND_URL}/`
         })
         next();
