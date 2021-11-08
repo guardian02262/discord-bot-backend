@@ -51,6 +51,7 @@ app.get("/", (req, res) => {
   res.send("good");
 });
 app.get("/guilds", async (req, res) => {
+  console.log("user", req.user)
   if (req.user) {
     const user = await User.findOne({ discordId: req.user.discordId });
     const uguilds = user.guilds;
