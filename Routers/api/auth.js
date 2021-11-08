@@ -4,17 +4,20 @@ const cfg = require('../../config')
 
 app.get('/discord', passport.authenticate('discord'));
 app.get('/discord/redirect', (req, res) => {
-    try {
-        passport.authenticate('discord', {
-            failureRedirect: `${cfg.FRONDEND_URL}/`
-        }), (req,res) => {
-            console.log("req", req);
-            res.redirect(`${cfg.FRONDEND_URL}/account`)
-        }
-    }
-    catch (error) {
-        console.log("error", error)
-    }
+    console.log("redirect req");
+    res.redirect(`${cfg.FRONDEND_URL}/account`)
+    // try {
+    //     console.log("redirect req", req);
+    //     passport.authenticate('discord', {
+    //         failureRedirect: `${cfg.FRONDEND_URL}/`
+    //     }), (req,res) => {
+    //         console.log("req", req);
+    //         res.redirect(`${cfg.FRONDEND_URL}/account`)
+    //     }
+    // }
+    // catch (error) {
+    //     console.log("error", error)
+    // }
 })
 
 app.get('/', (req, res) => {
