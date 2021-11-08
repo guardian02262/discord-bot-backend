@@ -12,10 +12,12 @@ app.get('/discord/redirect', passport.authenticate('discord', {
 app.get('/', (req, res) => {
     if (req.user) {
         console.log("authorized")
-        res.json({ msg: "authorized", user: req.user })
+        req.msg = "authorized"
+        // res.json({ msg: "authorized", user: req.user })
     } else {
         console.log("unauthorized")
-        res.json({ msg: "unauthorized" })
+        req.msg = "unauthorized"
+        // res.json({ msg: "unauthorized" })
     }
     res.redirect(`${cfg.FRONDEND_URL}/account`)
 })
