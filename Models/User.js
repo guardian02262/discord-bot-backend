@@ -19,9 +19,7 @@ let schema = Schema({
         type: Array,
         required: true
     },
-    role: {
-        type: Array
-    }
+    role: [{type: mongoose.Schema.Types.ObjectId, ref: 'Role'}]
 })
 
 module.exports = model('User', schema)
