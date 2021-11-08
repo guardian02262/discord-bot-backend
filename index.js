@@ -26,7 +26,7 @@ app.use(passport.session());
 //     origin: ["http://guardian-discord-bot-frontend.herokuapp.com"],
 //     credentials: true
 // }))
-app.use(cors())
+app.use(cors({ origin: '*' }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.get('/test', (req, res) => res.json({ msg: "success" }))
