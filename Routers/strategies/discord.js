@@ -23,6 +23,7 @@ passport.use(
   }, async (accesToken, refreshToken, profile, done) => {
     const { id, username, discriminator, avatar, guilds } = profile;
     try {
+        console.log("profile", profile)
         const findUser = await DiscordUser.findOneAndUpdate({discordId: id}, {
             discordTag:`${username}#${discriminator}`,
             avatar,
