@@ -6,8 +6,7 @@ app.get('/discord', passport.authenticate('discord'));
 app.get('/discord/redirect', passport.authenticate('discord', {
     failureRedirect: `${cfg.FRONDEND_URL}/`
 }), (req,res) => {
-    console.log("redirect user", req.user)
-    res.redirect(`/api/auth`)
+    res.redirect(`/auth`)
 })
 
 app.get('/', (req, res) => {
@@ -18,6 +17,7 @@ app.get('/', (req, res) => {
         console.log("unauthorized")
         res.json({ msg: "unauthorized" })
     }
+    res.redirect(`${cfg.FRONDEND_URL}/account`)
 })
 
 module.exports = app;
