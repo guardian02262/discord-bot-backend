@@ -1,12 +1,9 @@
 const app = require("express").Router();
 const passport = require("passport");
 const User = require("../../Models/User");
-const Role = require("../../Models/Role");
 const Guild = require("../../Models/GuildSchema");
 const config = require("../../config");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const message = require("../../constants/msg");
-const guild = require("../../bot/src/models/guild");
 
 async function bGetGuilds() {
     const res = await fetch("http://discord.com/api/v9/users/@me/guilds", {
@@ -51,6 +48,7 @@ app.get("/", (req, res) => {
   res.send("good");
 });
 app.get("/guilds", async (req, res) => {
+  console.log("isUser", req.user)
   if (req.user) {
     const user = await User.findOne({ discordId: req.user.discordId });
     const uguilds = user.guilds;
