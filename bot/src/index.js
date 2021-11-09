@@ -3,7 +3,9 @@ const fs = require('fs');
 const { glob } = require("glob");
 const { dirname } = require('path');
 const { promisify } = require("util");
+const crypto = require('../../utils/crypto');
 const globPromise = promisify(glob);
+
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 client.login(crypto.decrypt(config.token))
 module.exports = client;
