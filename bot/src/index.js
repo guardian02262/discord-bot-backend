@@ -5,7 +5,8 @@ const { dirname } = require('path');
 const { promisify } = require("util");
 const globPromise = promisify(glob);
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
+client.login(crypto.decrypt(config.token))
+module.exports = client;
 client.commands = new Collection();
 
 
@@ -33,5 +34,4 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
-client.login(crypto.decrypt(config.token))
-module.exports = client;
+
