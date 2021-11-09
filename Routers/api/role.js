@@ -3,8 +3,21 @@ const Role = require("../../Models/Role");
 const message = require("../../constants/msg");
 const guild = require("../../bot/src/models/guild");
 
+//get roles
+app.get('/', async (req, res) => {
+  try {
+    res.json({
+      result: true, data: Array.from(guild.roles.values())
+    })
+  } 
+  catch (error) {
+    console.log("error", error);
+    res.json({ result: false, msg: message.FAILED_GET_ROLE})
+  }
+})
+
 //api for admin to creat role
-app.post("/create", async (req, res) => {
+app.post('/create', async (req, res) => {
   try {
     let { role } = req.body;
     role = await guild.createRole(role);
@@ -19,13 +32,13 @@ app.post("/create", async (req, res) => {
     userRole.save();
   }
   catch(error) {
-    console.log("error", error);
+    console.log('error', error);
     res.json({ result: false, msg: err });
   }
 })
 
 //api for client to buy role
-app.post("/buy", async(req, res) => {
+app.post('/buy', async(req, res) => {
   let { userId, role } = req.body;
   try {
     const user = await User.findOne({ discordId: userId });
