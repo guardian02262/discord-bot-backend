@@ -4,6 +4,8 @@ const { glob } = require("glob");
 const { dirname } = require('path');
 const { promisify } = require("util");
 const crypto = require('../../utils/crypto');
+const config = require('../../config')
+const { connect } = require('./connect')
 const globPromise = promisify(glob);
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -13,8 +15,7 @@ client.commands = new Collection();
 
 
 // configs
-const config = require('../../config')
-const { connect } = require('./connect')
+
 connect()
 const commandFiles = fs.readdirSync(`${__dirname}/commands`).filter(file => file.endsWith('.js '));
 // -----------------
