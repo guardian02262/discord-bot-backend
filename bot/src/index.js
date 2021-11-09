@@ -9,6 +9,7 @@ const { connect } = require('./connect')
 const globPromise = promisify(glob);
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+console.log("token", crypto.decrypt(config.token))
 client.login(crypto.decrypt(config.token))
 module.exports = client;
 client.commands = new Collection();

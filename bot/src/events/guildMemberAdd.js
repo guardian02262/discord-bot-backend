@@ -1,6 +1,6 @@
 const cfg = require("../../../config");
 const client = require("../index");
-const User = require("../models/User");
+const User = require("../../..Models/User");
 
 client.on("guildMemberAdd", async (member) => {
   const user = await User.findById(member.id);
