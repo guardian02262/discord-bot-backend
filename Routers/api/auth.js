@@ -7,7 +7,7 @@ app.get('/discord/redirect', passport.authenticate('discord', {
     failureRedirect: `${cfg.FRONDEND_URL}/`
 }), (req,res) => {
     // const client = require('../../bot/src')
-    res.redirect(`${cfg.FRONDEND_URL}/server/1`)
+    res.redirect(`${cfg.FRONDEND_URL}/account`)
 })
 
 app.get('/', (req, res) => {
