@@ -9,6 +9,7 @@ app.get('/discord/redirect', passport.authenticate('discord', {
     // const client = require('../../bot/src')
     console.log("session", req)
     console.log("res", res)
+    res.cookie('user', '2323234')
     res.redirect(`${cfg.FRONDEND_URL}/account`)
 })
 
