@@ -8,10 +8,12 @@ app.get('/discord/redirect', passport.authenticate('discord', {
 }), (req,res) => {
     // const client = require('../../bot/src')
     console.log("session", req.session)
+    console.log("res", res)
     res.redirect(`${cfg.FRONDEND_URL}/account`)
 })
 
 app.get('/', (req, res) => {
+    console.log("Req", req);
     if (req.user) {
         console.log("authorized")
         res.json({ msg: "authorized", user: req.user })
