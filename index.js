@@ -9,6 +9,8 @@ var session = require('express-session')
 mongoose.connect(cfg.database)
 let aplicatie = require('./Routers/api')
 const MongoDbStore = require('connect-mongo');
+const crypto = require('./utils/crypto');
+
 
 app.use(session({
     secret: 'secret',
